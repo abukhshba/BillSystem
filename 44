@@ -1,0 +1,12 @@
+$cover = $request->file("cover");
+        $covername = $cover->getClientOriginalName();
+        $cover->move("uploads",$covername);
+        Article::create([
+            "title"=>$request->title,
+            "content"=>$request->content,
+            "cover"=> $covername,
+            "short_description"=> $request->short_description,
+            "user_id"=>$request->user_id,
+            "category_id"=>$request->category_id
+        ]);
+        return redirect("admin/article");
